@@ -1,0 +1,6 @@
+'TournamentWitness.dagIdentity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TournamentWitness.cycleCoordinates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TournamentWitness.cycleValue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TournamentWitness.linearization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TournamentWitness.minorFormula' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TournamentWitness.rationalWitness' depends on axioms: [propext, Classical.choice, Quot.sound]

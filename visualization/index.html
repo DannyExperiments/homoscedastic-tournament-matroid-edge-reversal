@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One reversal changes the rank</title>
+<style>
+:root {color-scheme:dark;--ink:#eff5f5;--muted:#b3c4ce;--line:#304a59;--panel:#10212b;--accent:#79e0c3;--edge:#feb76d}
+* {box-sizing:border-box}
+body {margin:0;background:#0b141b;color:var(--ink);font:1rem/1.55 system-ui,sans-serif}
+main {width:min(100% - 2rem,50rem);margin:2rem auto 3rem}
+h1 {margin:0 0 .35rem;line-height:1.15;font-size:clamp(1.9rem,6vw,3.25rem);letter-spacing:-.035em}
+h2 {font-size:1.15rem;margin:0}
+p {margin:.6rem 0}
+header p,.notes {color:var(--muted)}
+.card {margin:1.3rem 0;border:1px solid var(--line);border-radius:1rem;background:var(--panel);padding:1rem}
+.controls {display:flex;flex-wrap:wrap;gap:.55rem}
+button {background:#17303e;color:var(--ink);border:1px solid var(--line);border-radius:.6rem;min-height:2.75rem;padding:.35rem .8rem;font:inherit;cursor:pointer}
+button[aria-pressed=true] {background:var(--accent);color:#05211c;border-color:var(--accent);font-weight:700}
+button:focus-visible,input:focus-visible {outline:3px solid var(--edge);outline-offset:3px}
+canvas {display:block;width:100%;height:clamp(13rem,46vw,18rem);margin:.4rem auto;border-radius:.65rem;background:#0c1921}
+.range {display:flex;align-items:center;gap:.65rem}
+.range input {width:100%;min-height:2.75rem;accent-color:var(--accent)}
+.edges {display:flex;flex-wrap:wrap;gap:.5rem 1.35rem;margin:.65rem 0;font-size:.95rem}
+.changed {color:var(--edge)}
+dl {display:grid;grid-template-columns:repeat(auto-fit,minmax(7.1rem,1fr));gap:.55rem;margin:.9rem 0 .35rem}
+dl div {background:#0b1a23;border:1px solid var(--line);padding:.5rem .65rem;border-radius:.55rem}
+dt {font-size:.86rem;color:var(--muted)}
+dd {margin:0;font-size:1.2rem;font-weight:680;color:var(--accent);font-variant-numeric:tabular-nums}
+.formula {font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+summary {cursor:pointer;color:var(--accent);font-weight:650}
+@media (max-width:430px) {main {margin-top:1.2rem}.card {padding:.75rem} .controls button {flex:1 0 auto}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>One reversal changes the rank</h1><p>Follow the flipped arrow and inspect the same three precision coordinates before and after.</p></header>
+<section class="card" aria-labelledby="example">
+<h2 id="example">Three vertices</h2>
+<p class="formula">Exact witness: <var>s</var> = 1, <var>a</var> = <var>b</var> = 1/4, <var>c</var> = 1/2.</p>
+<div class="controls" role="group" aria-label="Tournament">
+<button id="g" type="button" aria-pressed="true">G · Transitive</button>
+<button id="h" type="button" aria-pressed="false">H · Directed triangle</button>
+</div>
+<canvas id="graph" role="img" aria-label="Transitive tournament on vertices 1, 2 and 3"></canvas>
+<label class="range" for="angle"><span>Rotate</span><input id="angle" type="range" min="0" max="360" value="18" aria-label="Rotation angle"></label>
+<div class="edges"><span>Fixed edges 2 → 1 and 1 → 3</span><strong class="changed" id="direction">Varying edge 2 → 3</strong></div>
+<dl aria-live="polite">
+<div><dt>Generic rank</dt><dd id="rank">2</dd></div>
+<div><dt>Separator P</dt><dd id="residual">0</dd></div>
+<div><dt>u = K<sub>11</sub></dt><dd>17/16</dd></div>
+<div><dt>v = K<sub>13</sub></dt><dd>−1/4</dd></div>
+<div><dt>w = K<sub>33</sub></dt><dd id="w">1</dd></div>
+</dl>
+<p class="formula"><var>P</var> = <var>u</var><var>w</var> − <var>v</var><sup>2</sup> − <var>w</var><sup>2</sup>. <span id="explain">In G the triple depends only on s and b, so P is identically zero.</span></p>
+</section>
+<details class="card">
+<summary>How the example proves a matroid difference</summary>
+<p>The ground set includes every precision coordinate K<sub>ij</sub> with i ≤ j. In G, K<sub>13</sub> and K<sub>33</sub> already have a nonzero two-by-two derivative minor. The full triple has rank two because only s and b enter.</p>
+<p>In H, the derivative determinant on s, b, c is 2s²c(b² − 1). It is −15/16 at this admissible point where det(I − Λ) = 31/32, so the triple is independent generically. The paper also proves that all twenty triples in H are independent and gives a four-vertex strongly connected construction that lifts to every larger size.</p>
+<p class="notes">Wu’s dissertation, §5.4.1, p. 63, reports earlier computations that imply small labelled counterexamples. This explorer depicts the explicit three-vertex certificate in the paper.</p>
+</details>
+</main>
+<script>
+"use strict";
+const get = (id) => document.getElementById(id);
+const canvas = get("graph");
+const ctx = canvas.getContext("2d");
+const nodes = {1:[0,1.06,-.25],2:[-1.16,-.67,.45],3:[1.16,-.67,.45]};
+let cycle = false;
+function paint() {
+  const {width,height}=canvas.getBoundingClientRect();
+  const density=Math.min(devicePixelRatio||1,2);
+  canvas.width=Math.round(width*density); canvas.height=Math.round(height*density);
+  ctx.scale(density,density);
+  const angle=Number(get("angle").value)*Math.PI/180, pitch=.34;
+  const scale=Math.min(width/4,height/3.5,92), radius=Math.max(16,scale*.22);
+  const position={};
+  for (const [label,[px,py,pz]] of Object.entries(nodes)) {
+    const x=px*Math.cos(angle)+pz*Math.sin(angle), z=-px*Math.sin(angle)+pz*Math.cos(angle);
+    const y=py*Math.cos(pitch)-z*Math.sin(pitch), depth=py*Math.sin(pitch)+z*Math.cos(pitch);
+    const perspective=6/(6-depth);
+    position[label]=[width/2+x*scale*perspective,height*.54-y*scale*perspective,depth];
+  }
+  const edges=[[2,1,false],[1,3,false],cycle?[3,2,true]:[2,3,true]];
+  const depth=(e)=>position[e[0]][2]+position[e[1]][2];
+  for (const [u,v,changed] of edges.sort((a,b)=>depth(a)-depth(b))) {
+    const [ax,ay]=position[u], [bx,by]=position[v];
+    const d=Math.hypot(bx-ax,by-ay);
+    if (d<15) continue;
+    const theta=Math.atan2(by-ay,bx-ax), pad=Math.min(radius+4,d/4);
+    const dx=Math.cos(theta),dy=Math.sin(theta),ex=bx-pad*dx,ey=by-pad*dy;
+    ctx.strokeStyle=ctx.fillStyle=changed?"#feb76d":"#5e879a";
+    ctx.lineWidth=changed?4:3;
+    ctx.beginPath();ctx.moveTo(ax+pad*dx,ay+pad*dy);ctx.lineTo(ex,ey);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ex,ey);
+    ctx.lineTo(ex-14*Math.cos(theta+.49),ey-14*Math.sin(theta+.49));
+    ctx.lineTo(ex-14*Math.cos(theta-.49),ey-14*Math.sin(theta-.49));ctx.closePath();ctx.fill();
+  }
+  for (const [label,[x,y,z]] of Object.entries(position).sort((a,b)=>a[1][2]-b[1][2])) {
+    ctx.beginPath();ctx.arc(x,y,radius+2*z,0,Math.PI*2);ctx.fillStyle="#243b49";ctx.fill();
+    ctx.lineWidth=2;ctx.strokeStyle="#79e0c3";ctx.stroke();
+    ctx.fillStyle="#eff5f5";ctx.font="700 18px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.fillText(label,x,y+1);
+  }
+}
+function select(isCycle) {
+  cycle=isCycle;
+  get("g").setAttribute("aria-pressed",String(!cycle));
+  get("h").setAttribute("aria-pressed",String(cycle));
+  get("direction").textContent=cycle?"Varying edge 3 → 2":"Varying edge 2 → 3";
+  get("w").textContent=cycle?"5/4":"1";
+  get("residual").textContent=cycle?"−19/64":"0";
+  get("rank").textContent=cycle?"3":"2";
+  get("explain").textContent=cycle?"In H the third coordinate also depends on c. The selected minor is −15/16.":"In G the triple depends only on s and b, so P is identically zero.";
+  canvas.setAttribute("aria-label",cycle?"Directed triangle 2 to 1 to 3 to 2":"Transitive tournament with edges 2 to 1, 1 to 3 and 2 to 3");
+  paint();
+}
+get("g").addEventListener("click",()=>select(false));
+get("h").addEventListener("click",()=>select(true));
+get("angle").addEventListener("input",paint);
+new ResizeObserver(paint).observe(canvas);
+select(false);
+</script>
+</body>
+</html>

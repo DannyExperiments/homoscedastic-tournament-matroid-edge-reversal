@@ -1,0 +1,29 @@
+{
+  "title": "Edge reversal changes Jacobian matroids of homoscedastic tournaments",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "DannyExperiments"
+    }
+  ],
+  "keywords": [
+    "algebraic matroids",
+    "homoscedastic structural equation models",
+    "tournaments",
+    "causal identifiability",
+    "Jacobian rank"
+  ],
+  "description": "<p>Wu's dissertation (§5.4.1, p. 63) reports computations that imply small labelled counterexamples to the edge-reversal conjecture for homoscedastic tournament Jacobian matroids. This release gives explicit exact certificates and a uniform strongly connected extension. Source: https://mediatum.ub.tum.de/doc/1713538/document.pdf#page=79</p><p>For the transitive and directed-triangle pair, reversing one arrow changes the rank of the same precision-coordinate triple from two to three. A quadratic relation holds before the reversal, and a rational nonzero Jacobian minor certifies independence after it. Every triple is independent in the cycle's matroid, so the abstract matroids also differ at size three. A four-coordinate separator then yields strongly connected labelled examples in every size from four onward.</p><p>The literature audit compares Wu's prior computations, Conjecture 5.4, and the listed Macaulay2 code, which differentiates only off-diagonal coordinates. Exact replay checks the small examples, all twenty triples per graph, and the extensions through ten vertices. The partial Lean 4.30.0 file checks selected Gram coordinates, separator and linearization identities, the minor formula and rational values. The full matroid and extension arguments are analytic. Includes an animated example and offline explorer. Internally reviewed, not peer reviewed.</p><p>Under human direction, ChatGPT Astra 6.2 (OpenAI) generated the discovery proof and its research packet. OpenAI Codex independently audited the mathematics and developed the partial Lean certificate. GPT-6.2 Sol (OpenAI) checked the prior work and prepared the manuscript, exact replay and illustrations. DannyExperiments maintains the repository and is the preferred citation identity. No AI system is proposed as an author.</p><p>Release v1.0.0. https://github.com/DannyExperiments/homoscedastic-tournament-matroid-edge-reversal/releases/tag/v1.0.0</p>",
+  "license": "other-closed",
+  "notes": "All rights reserved. Publicly downloadable files are supplied without a repository-wide reuse license.",
+  "publication_date": "2026-11-27",
+  "version": "1.0.0",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DannyExperiments/homoscedastic-tournament-matroid-edge-reversal/releases/tag/v1.0.0",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}

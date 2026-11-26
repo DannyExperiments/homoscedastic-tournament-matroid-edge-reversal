@@ -1,0 +1,46 @@
+G coordinates 17/16, -1/4, 1; det(A)=1; P=0
+G triple ranks in lexicographic coordinate order:
+  K11 K12 K13: 3
+  K11 K12 K22: 3
+  K11 K12 K23: 3
+  K11 K12 K33: 3
+  K11 K13 K22: 3
+  K11 K13 K23: 3
+  K11 K13 K33: 2
+  K11 K22 K23: 3
+  K11 K22 K33: 3
+  K11 K23 K33: 3
+  K12 K13 K22: 3
+  K12 K13 K23: 3
+  K12 K13 K33: 3
+  K12 K22 K23: 3
+  K12 K22 K33: 3
+  K12 K23 K33: 3
+  K13 K22 K23: 3
+  K13 K22 K33: 3
+  K13 K23 K33: 3
+  K22 K23 K33: 3
+H coordinates 17/16, -1/4, 5/4; det(A)=31/32; P=-19/64
+H triple ranks in lexicographic coordinate order:
+  K11 K12 K13: 3
+  K11 K12 K22: 3
+  K11 K12 K23: 3
+  K11 K12 K33: 3
+  K11 K13 K22: 3
+  K11 K13 K23: 3
+  K11 K13 K33: 3
+  K11 K22 K23: 3
+  K11 K22 K33: 3
+  K11 K23 K33: 3
+  K12 K13 K22: 3
+  K12 K13 K23: 3
+  K12 K13 K33: 3
+  K12 K22 K23: 3
+  K12 K22 K33: 3
+  K12 K23 K33: 3
+  K13 K22 K23: 3
+  K13 K22 K33: 3
+  K13 K23 K33: 3
+  K22 K23 K33: 3
+PASS: both three-vertex witnesses, all triples, and both two-vertex orientations
+PASS: three-coordinate lifts through 10 and strongly connected certificates for 4–10

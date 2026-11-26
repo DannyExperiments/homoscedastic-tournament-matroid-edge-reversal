@@ -1,0 +1,242 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Edge reversal changes Jacobian matroids of homoscedastic tournaments}}
+\urlstyle{same}
+\DeclareFontShape{OT1}{cmr}{bx}{n}{<-> cmbx10}{}
+\DeclareMathSizes{8}{8}{8}{8}
+\DeclareMathSizes{9}{9}{8}{8}
+\DeclareMathSizes{10.95}{10.95}{8}{8}
+\newtheorem{theorem}{Theorem}
+\title{Edge reversal changes Jacobian matroids of homoscedastic tournaments}
+\date{}
+\begin{document}
+\begin{abstract}
+Wu's dissertation reports computations that imply small counterexamples to
+the edge-reversal conjecture for labelled Jacobian matroids. We give explicit
+exact certificates and extend the strongly connected counterexamples to
+every size \(n\ge4\). On three vertices one edge reversal takes a transitive
+tournament to a directed triangle. One precision-coordinate triple has rank
+two before the reversal and rank three after it. All twenty triples are
+independent for the directed triangle, so these two matroids are also
+nonisomorphic as abstract matroids.
+\end{abstract}
+\maketitle
+
+\section{Question and convention}
+
+For a loopless directed graph \(G\) with no opposite-edge pair, let \(A=I-\Lambda\),
+where \(\lambda_{ij}\) is free exactly on arrows \(i\to j\). The precision
+parametrization of the homoscedastic linear Gaussian structural equation
+model is
+\[
+ K=\psi_G(s,\Lambda)=sAA^{\top},\qquad s>0,\quad \det A\ne0 .
+\]
+This is the convention of Drton, Hollering and Wu \cite{dhw}. Its Jacobian
+matroid has a ground-set element for each labelled coordinate \(K_{ij}\)
+with \(i\le j\), including \(K_{ii}\). A coordinate set has rank equal to
+the rank of its derivative matrix over the rational function field.
+In the transposed convention of \cite{dhw} the ground-set elements are
+columns. In the calculations below coordinates are rows. A nonzero
+minor at one admissible point certifies a nonzero generic minor.
+The characteristic-zero criterion relating algebraic independence and
+Jacobian rank is stated in \cite{dhw}.
+
+A complete simple directed graph in this setting is a tournament.
+Conjecture 5.4 of \cite{dhw} asserts equality of the labelled matroids
+when two tournaments differ only on the edge between vertices \(n-1,n\).
+Simultaneously relabelling both graphs allows us to choose the names
+used in the examples before making those endpoints the last two vertices.
+
+\begin{theorem}
+For every \(n\ge3\), a single reversal can change the labelled Jacobian
+matroid of a homoscedastic tournament. At \(n=3\) the two matroids can also
+differ up to abstract isomorphism. For every \(n\ge4\), a labelled
+counterexample is possible with both tournaments strongly connected.
+\end{theorem}
+
+\section{Three vertices}
+
+Let \(G\) have edges \(2\to1\), \(1\to3\), \(2\to3\). Reverse \(2\to3\)
+to obtain the directed cycle \(H\). Write \(a=\lambda_{21}\),
+\(b=\lambda_{13}\), and let \(c\) denote the coefficient on the
+edge undergoing reversal. The two row matrices are
+\[
+ A_G=\begin{pmatrix}1&0&-b\\-a&1&-c\\0&0&1\end{pmatrix},
+ \qquad
+ A_H=\begin{pmatrix}1&0&-b\\-a&1&0\\0&-c&1\end{pmatrix}.
+\]
+The triple \((u,v,w)=(K_{11},K_{13},K_{33})\) is
+\(\bigl(s(1+b^2),-sb,s\bigr)\) for \(G\). For \(H\) the first two
+coordinates agree and the third becomes \(s(1+c^2)\).
+With \(P=uw-v^2-w^2\), direct substitution gives
+\[
+ P_G=0,\qquad P_H=s^2c^2(b^2-1-c^2).
+\]
+For \(G\) the generic rank is at most two, because the triple depends
+only on \(s,b\). The derivative matrix for \(v,w\) in \(s,b\) has
+determinant \(s\), giving rank exactly two. For \(H\), the determinant
+on \((s,b,c)\) is
+\[
+ \det\begin{pmatrix}
+ 1+b^2 & 2sb & 0\\[-1pt]
+ -b & -s & 0\\[-1pt]
+ 1+c^2 & 0 & 2sc
+ \end{pmatrix}
+ = 2s^2 c(b^2-1).
+\]
+At \(s=1,\ a=b=1/4,\ c=1/2\), the matrix \(A_H\) has determinant
+\(1-abc=31/32\). The separator and derivative determinant evaluate
+to \(-19/64\) and \(-15/16\), respectively.
+
+\subsection{All triples for the directed cycle}
+
+The six coordinates of \(H\) come in the three pairs
+\(\{-sr,s(1+r^2)\}\) for \(r=a,b,c\).
+For a triple with one coordinate from each pair, the private-variable
+derivatives in \(a,b,c\) give a diagonal minor up to permutation.
+Its factors are each of the form \(-s\) or \(2sr\), and their product
+is nonzero generically. If a triple takes both coordinates of a pair
+with parameter \(r\), the corresponding two-by-two minor on \(s,r\)
+is \(s(1-r^2)\) up to sign. The third coordinate has a nonzero
+derivative in its own private variable, so the resulting three-by-three
+minor is nonzero generically. This treats every triple, since each pair
+has only two entries. The number of independent three-element sets
+is an invariant of an abstract matroid. \(H\) has all twenty and \(G\)
+has at least the one dependent triple exhibited above, proving that
+the matroids are nonisomorphic at this size.
+
+For a direct labelled lift to \(n>3\), orient every arrow from a
+new vertex to each old vertex, with arbitrary orientations among
+new vertices. The old rows have zero entries in the new columns,
+so the selected three precision entries and their ranks persist.
+Relabel 2 and 3 as \(n-1,n\).
+At \(n=2\), the three coordinates in either direction, up to
+permutation, are \(s,-sr,s(1+r^2)\). Their three pair minors in
+\(s,r\) are nonzero polynomials. Both matroids are therefore uniform
+of rank two on three elements, so \(n=3\) is minimal.
+
+\section{Strongly connected counterexamples}
+
+On \(1,2,3,4\), let \(G\) have arrows
+\[
+ 2\to1,\quad3\to1,\quad1\to4,\quad3\to2,\quad4\to2,\quad4\to3 .
+\]
+Reverse \(3\to2\) to obtain \(H\). The cycles \(1\to4\to3\to2\to1\)
+in \(G\) and \(1\to4\to2\to3\to1\) in \(H\) show strong connectivity.
+Put \(a=\lambda_{21}\), \(b=\lambda_{14}\), and \(c=\lambda_{23}\)
+in \(H\). For \((x,u,y,v)=(K_{11},K_{14},K_{22},K_{12})\), the formula is
+\[
+ \psi_G:\ (s(1+b^2),-sb,s(1+a^2),-sa),\qquad
+ \psi_H:\ (s(1+b^2),-sb,s(1+a^2+c^2),-sa).
+\]
+Here \(\psi_G,\psi_H\) designate the selected coordinates.
+The rank for \(G\) is at most three by its three-parameter formula.
+The minor for \((x,u,v)\) on \((s,b,a)\) at \(s=1,a=b=0\)
+equals 1. For \(H\), the four-by-four determinant in
+\((s,b,a,c)\) equals \(2s^3c(b^2-1)\). At \(s=1,a=b=0,c=1/2\),
+with the other coefficients zero, the determinant is \(-1\)
+and \(A_H\) is invertible. Both determinant inequalities persist
+under sufficiently small perturbations to nonzero edge coefficients.
+
+A second expression makes the dependence visible algebraically.
+Let \(D=u^2-v^2\). In \(G\) we have \(s(x-y)=D\) and
+\(s^2-xs+u^2=0\), which give
+\[
+ D^2-xD(x-y)+u^2(x-y)^2=0.
+\]
+In \(H\), set \(s=1,a=0,b=c=1/2\) and all other coefficients to zero.
+The two nonzero edges \(1\to4,2\to3\) give an invertible \(A_H\),
+and \(x=y=5/4,\ D=1/4\), so the polynomial equals \(1/16\).
+
+For each new vertex \(t\), orient \(4\to t\) and \(t\to1,2,3\).
+Orient the pairs among the new vertices arbitrarily. Each \(t\) can
+reach and be reached from the strongly connected core. Rows 1 and 2
+keep zeros in every new column. Consequently \(K_{11},K_{22}\)
+and \(K_{12}\) stay fixed, as does \(K_{14}\) because each newly
+added term has a zero factor in row 1. The coordinates and their
+ranks persist. The pair again becomes a counterexample of the
+stated conjecture after relabelling 2 and 3 as \(n-1,n\).
+This is a labelled rank statement for \(n\ge4\). On three vertices
+one reversal of the only strongly connected tournament type destroys
+strong connectivity, so the strongly connected pair is minimal.
+
+\section{An earlier three-vertex construction}
+
+Another labelled witness uses two transitive graphs. Keep
+\(2\to1,3\to1\) and reverse \(2\to3\). Write
+\(a,b,c\) for the corresponding free entries of \(A=I-\Lambda\)
+on the varying edge, \(2\to1\), and \(3\to1\).
+The triple \((K_{11},K_{13},K_{33})\) is
+\((s,sc,s(1+c^2))\) before the reversal and
+\((s,sc,s(1+c^2+a^2))\) after it.
+The first triple satisfies
+\(K_{11}K_{33}-K_{11}^2-K_{13}^2=0\).
+The rank is two, since the \((K_{11},K_{13})\) minor on \(s,c\) is \(s\).
+The second triple has determinant \(2s^2a\) on \(s,c,a\), so has
+rank three. The underlying graphs are isomorphic by exchanging
+2 and 3, which induces an isomorphism of their abstract matroids.
+
+\section{Prior computations and the code comparison}
+
+Wu's dissertation \cite[\S5.4.1, p.~63]{wu} reports five labelled
+matroids for the eight three-vertex tournaments. The directed triangles
+are singleton classes, so a cycle-to-transitive reversal already
+contradicts the conjecture by those computations. The reported complete
+four-vertex collisions are confined to DAGs, also implying strongly
+connected counterexamples at size four. The dissertation was submitted in June and accepted in August 2023.
+The first arXiv posting dates to August 2023, and the journal issue to
+February 2025.
+The direct certificates above prove specific ranks and the separation
+of abstract matroids at size three. The strong construction extends
+the labelled separation uniformly in size.
+
+The paper reports a Macaulay2 check through six vertices. In the
+linked script \cite{code}, line 32 returns only entries indexed by
+two-element subsets of the vertex set. Lines 37 and 66--71 use
+that list for the matroid comparison. At \(\Lambda=0\) and \(s=1\),
+there is exactly one edge variable for each off-diagonal coordinate
+of a tournament. The corresponding block of the Jacobian is a
+signed permutation matrix. The off-diagonal restriction is thus
+free for either orientation. Inclusion of the diagonals is essential
+to the conjecture as stated and to the exhibited separators.
+
+\section{Verification and disclosure}
+
+Internally reviewed, not peer reviewed. The exact rational replay
+checks the small examples, all twenty triples for each three-vertex
+graph, and the strongly connected construction through ten vertices.
+The repository contains a partial Lean 4.30.0 check of the selected
+three-vertex Gram coordinates, separator identities, polynomial
+linearization, minor formula and rational values. The Jacobian
+matroid criterion, abstract comparison and uniform extension are
+proved in the text. The Lean file does not formalize those results
+or the invertibility of the full coefficient matrix.
+
+Under human direction, ChatGPT Astra 6.2 (OpenAI) generated the
+discovery proof and its research packet. OpenAI Codex performed the
+independent mathematical review and developed the partial Lean
+certificate. GPT-6.2 Sol (OpenAI) checked the prior computations
+and prepared the manuscript, exact replay and illustrations.
+DannyExperiments maintains the repository and is the preferred
+citation identity. No AI system is proposed as an author.
+
+\begin{thebibliography}{9}
+\bibitem{dhw}
+M. Drton, B. Hollering and J. Wu,
+\emph{Identifiability of homoscedastic linear structural equation
+models using algebraic matroids},
+Advances in Applied Mathematics \textbf{163} (2025), Part B, 102794.
+\href{https://doi.org/10.1016/j.aam.2024.102794}{doi:10.1016/j.aam.2024.102794}.
+\bibitem{wu}
+J. Wu, \emph{Homoscedasticity and Feedback Loops in Graphical Models},
+doctoral dissertation, Technical University of Munich, accepted 2023.
+\href{https://mediatum.ub.tum.de/doc/1713538/document.pdf#page=79}{Section 5.4.1, p.~63}.
+\bibitem{code}
+M. Drton, B. Hollering and J. Wu,
+\emph{Cyclic SEM identifiability}, MathRepo supplementary materials.
+\href{https://mathrepo.mis.mpg.de/_downloads/8104bb4d6c771e454c148c4d4e0f542e/CompleteCyclicSEMs.m2}{CompleteCyclicSEMs.m2}.
+\end{thebibliography}
+\end{document}
